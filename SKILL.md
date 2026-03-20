@@ -14,8 +14,8 @@ description: |
 
 ```
 1. Understand requirements  -> determine diagram type, elements, relationships
-2. Generate XML directly    -> LLM writes drawio XML (refer to references/best-practices.md)
-3. Self-review checklist    -> verify structure, layout, connections
+2. Generate XML directly    -> write drawio XML (read only the relevant section from references/best-practices.md)
+3. Self-review (DO NOT SKIP) -> re-read XML and fix any issues found
 4. Save .drawio file        -> write to user's working directory
 5. CLI export               -> call draw.io desktop CLI to export image
 6. Deliver to user          -> show image + provide editable .drawio file
@@ -138,23 +138,27 @@ For vertical centering in a column, apply the same logic to Y axis.
 | ER table header | 200 | varies |
 | Group/container | auto | auto |
 
-## Step 4: Self-Review Checklist
+## Step 4: Self-Review (DO NOT SKIP)
 
-After generating XML, verify every item:
+After generating XML, re-read your output and check each item below. If any check fails, fix the XML before proceeding. This step catches the most common rendering bugs — skipping it results in broken diagrams.
 
+**Structural checks:**
 - [ ] All `id` values are unique across the entire file
-- [ ] Every `mxCell` with `vertex="1"` has `parent="1"`
+- [ ] Every `mxCell` with `vertex="1"` has correct `parent` (usually `"1"`, but container children use the container ID)
 - [ ] Every edge's `source` and `target` reference existing node IDs
-- [ ] No two nodes overlap (compare x, y, width, height bounding boxes)
-- [ ] Coordinates are multiples of 10
-- [ ] All nodes include `whiteSpace=wrap;html=1;` in style
-- [ ] `fontSize=14` or larger for readability
-- [ ] Edges use `edgeStyle=orthogonalEdgeStyle` for clean routing (except mindmaps which use curved)
-- [ ] Decision nodes use `rhombus` shape
-- [ ] Database nodes use `shape=cylinder3` or `shape=cylinder`
 - [ ] XML is well-formed: all tags closed, all attribute values quoted
 - [ ] `mxGeometry` always has `as="geometry"` attribute
-- [ ] Page dimensions (pageWidth, pageHeight) are large enough for all content
+
+**Layout checks** (these are the most common failures — actually verify the numbers):
+- [ ] No two non-container nodes overlap: for each pair, confirm their bounding boxes (x, y, x+width, y+height) don't intersect
+- [ ] All coordinates (x, y) are multiples of 10 — scan every `mxGeometry` element
+- [ ] Page dimensions (pageWidth, pageHeight) are large enough for all content with margins
+
+**Style checks:**
+- [ ] All nodes include `whiteSpace=wrap;html=1;` in style
+- [ ] `fontSize=14` or larger for readability
+- [ ] Edges use `edgeStyle=orthogonalEdgeStyle` for clean routing (except mindmaps which use `curved=1`)
+- [ ] Decision nodes use `rhombus` shape; database nodes use `shape=cylinder3`
 
 ## Step 5: CLI Export (Cross-Platform)
 
@@ -233,20 +237,22 @@ After export:
 - No Chinese characters, spaces, or special characters in filenames
 - Output image uses same base name: `ecommerce-order-flow.png`
 
-## Architecture Diagram: Preferred Style
+## Architecture Diagram: Layered Block Style
 
-For architecture diagrams, **always use the Layered Block style** unless the user explicitly asks for a connected-box-with-arrows style. The layered block style features:
+For architecture diagrams, use the **Layered Block Style** — see `references/best-practices.md` for full templates and layout constants. This is the preferred style: structured block layout with no arrows, horizontal layers, left label column, and optional cross-cutting sidebar.
 
-- Gray background rectangle (`fillColor=#f5f5f5;strokeColor=none;`)
-- Left label column: bold blue cells naming each layer
-- Layer containers: blue with `opacity=60`
-- Sub-groups within layers: blue with `verticalAlign=top;spacingTop=8;` headers
-- Leaf items: white `#ffffff` with gray border `#999999`
-- Optional cross-cutting sidebar: vertical panel on the right (red, dashed, `opacity=30`)
-- **No arrows/edges** — hierarchy expressed through spatial nesting
+## Modifying Existing Diagrams
 
-See `references/best-practices.md` > "Architecture Diagram Templates (Layered Block Style)" for full templates and layout constants.
+When the user is not satisfied with the result and asks for modifications:
+1. **Read the existing .drawio file** first to understand current structure
+2. **Edit based on the existing XML** — do not regenerate from scratch
+3. Apply the user's requested changes while preserving the overall layout and style
+4. Run the same self-review and export steps
 
 ## Reference
 
-For detailed XML templates, color codes, and per-diagram-type examples, read `references/best-practices.md`.
+`references/best-practices.md` contains:
+- **General Rules** — ID management, style essentials, common mistakes
+- **Architecture Diagram Templates (Layered Block Style)** — the preferred architecture style with full XML templates and layout constants
+
+For other diagram types (flowchart, UML, ER, mindmap, network, etc.), generate appropriate draw.io XML directly based on your knowledge. Read the "General Rules" section for basic formatting guidance.
