@@ -9,7 +9,7 @@
 向你的 AI 编程 Agent 发送以下提示词：
 
 ```
-帮我安装这个skill：https://github.com/brucevanfdm/drawio-skill
+帮我安装这个skill：https://github.com/brucevanfdm/bruce-drawio
 ```
 
 Agent 会自动克隆仓库并完成配置。
@@ -59,7 +59,7 @@ Agent 会自动克隆仓库并完成配置。
 ## 项目结构
 
 ```
-drawio-skill/
+bruce-drawio/
   SKILL.md                      # 主技能文档（工作流程 + 规则）
   skill.json                    # 技能元数据
   references/

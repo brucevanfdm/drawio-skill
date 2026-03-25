@@ -9,30 +9,30 @@ Cross-platform draw.io (diagrams.net) diagram generation skill for AI coding age
 Send the following prompt to your AI coding agent:
 
 ```
-Help me install this skill: https://github.com/brucevanfdm/drawio-skill
+Help me install this skill: https://github.com/brucevanfdm/bruce-drawio
 ```
 
 The agent will clone the repository and configure the skill automatically.
 
 ## Supported Diagram Types
 
-| Type | Description | Trigger |
-|------|-------------|---------|
-| Flowchart | Business process, approval flows, algorithms | "draw a flowchart" |
-| Architecture | System architecture, microservices, deployment | "draw an architecture diagram" |
-| UML Sequence | Interaction timelines between components | "draw a sequence diagram" |
-| UML Class | Class relationships, inheritance | "draw a class diagram" |
-| ER Diagram | Database design, entity relationships | "draw an ER diagram" |
-| Mindmap | Brainstorming, knowledge organization | "draw a mindmap" |
-| Network Topology | Network architecture, device connectivity | "draw a network topology" |
+| Type             | Description                                    | Trigger                        |
+| ---------------- | ---------------------------------------------- | ------------------------------ |
+| Flowchart        | Business process, approval flows, algorithms   | "draw a flowchart"             |
+| Architecture     | System architecture, microservices, deployment | "draw an architecture diagram" |
+| UML Sequence     | Interaction timelines between components       | "draw a sequence diagram"      |
+| UML Class        | Class relationships, inheritance               | "draw a class diagram"         |
+| ER Diagram       | Database design, entity relationships          | "draw an ER diagram"           |
+| Mindmap          | Brainstorming, knowledge organization          | "draw a mindmap"               |
+| Network Topology | Network architecture, device connectivity      | "draw a network topology"      |
 
 ## Platform Support
 
-| Platform | Install Command | Package Manager |
-|----------|----------------|-----------------|
-| macOS | `brew install --cask drawio` | Homebrew |
-| Windows | `winget install JGraph.Draw` | winget / Chocolatey |
-| Linux | `snap install drawio` | snap / manual |
+| Platform | Install Command                | Package Manager     |
+| -------- | ------------------------------ | ------------------- |
+| macOS    | `brew install --cask drawio` | Homebrew            |
+| Windows  | `winget install JGraph.Draw` | winget / Chocolatey |
+| Linux    | `snap install drawio`        | snap / manual       |
 
 All platforms also support manual download from [draw.io releases](https://github.com/jgraph/drawio-desktop/releases).
 
@@ -48,18 +48,18 @@ All platforms also support manual download from [draw.io releases](https://githu
 
 ## Export Formats
 
-| Format | Flag | Use Case |
-|--------|------|----------|
-| PNG | `-f png` | Default, universal |
-| SVG | `-f svg` | Scalable vector |
-| PDF | `-f pdf` | Print / document |
+| Format | Flag       | Use Case           |
+| ------ | ---------- | ------------------ |
+| PNG    | `-f png` | Default, universal |
+| SVG    | `-f svg` | Scalable vector    |
+| PDF    | `-f pdf` | Print / document   |
 
 Use `--scale 2` for high-DPI PNG output.
 
 ## Project Structure
 
 ```
-drawio-skill/
+bruce-drawio/
   SKILL.md                      # Main skill document (workflow + rules)
   skill.json                    # Skill metadata
   references/

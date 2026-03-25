@@ -1,5 +1,5 @@
 ---
-name: drawio
+name: bruce-drawio
 description: |
   **Use this skill** when the user wants to create any diagram: flowchart, architecture, UML (sequence/class), ER, mindmap, network topology, or any visual diagram.
 
